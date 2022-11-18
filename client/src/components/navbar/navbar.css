@@ -1,0 +1,8 @@
+.navbar {
+    background: whitesmoke;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+}
