@@ -61,7 +61,7 @@
 .view-decks {
     position: relative;
     display: grid;
-    grid-gap: 15px;
+    grid-gap: 25px;
     width: 900px;
     margin: 0;
     padding-left: 0px;
@@ -72,12 +72,10 @@
 .deckCard {
     position: relative;
     background-color: transparent;
-    /* perspective: 1000px; */
     width: 100%;
     height: 100%;
     perspective: 1000px;
     display: grid;
-    /* grid-template-areas: "overlap", */
 }
 
 .deckCard-inner {

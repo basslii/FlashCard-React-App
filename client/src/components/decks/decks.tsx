@@ -19,20 +19,22 @@ export default function Decks () {
         };
         fetchDecksFromServer();
 
-    }, [])
+    }, [getDecks])
  
     const onCreateDecks = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        await fetch('http://localhost:5000/decks', {
-            method: 'POST',
-            body: JSON.stringify({
-                title,
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        if(title.length > 0) {
+            await fetch('http://localhost:5000/decks', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
 
         setTitle('');
     }
@@ -52,7 +54,7 @@ export default function Decks () {
                             value={title}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {setTitle(event.target.value)}}
                         />
-                        <button className='btn btn-primary' type='submit'>add title</button>
+                        <button className='btn btn-primary' type='submit' disabled={title.length === 0}>add title</button>
                     </form>
                 </div>
                 <div className="flashCard-container">
