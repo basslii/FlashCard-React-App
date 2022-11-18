@@ -1,10 +1,12 @@
-import { json } from "body-parser";
+import { config } from 'dotenv';
 import express, { Request, Response} from "express";
 import mongoose from 'mongoose';
 import Deck from './models/Deck';
 
 const app = express();
 const PORT = 5000;
+
+config();
 
 app.use(express.json());
 
@@ -22,9 +24,7 @@ app.post('/decks', async (req:Request, res:Response) => {
 })
 
 mongoose
-    .connect(
-        'mongodb+srv://flashCardApp:SWxnlwHKqx9cPS32@cluster0.awhndku.mongodb.net/?retryWrites=true&w=majority'
-    )
+    .connect(process.env.MONGO_URL!)
     .then(() => {
         console.log(`DB is listening on Port: ${PORT}`);
         app.listen(PORT);
