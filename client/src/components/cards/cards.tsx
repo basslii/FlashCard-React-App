@@ -1,7 +1,7 @@
 import Navbar from "../navbar/navbar";
 import "./cards.css"
 import React, { useEffect, useState } from 'react'
-import {  useParams } from 'react-router-dom';
+import {  Navigate, useNavigate, useParams } from 'react-router-dom';
 import createCard from "../../api/createCard";
 import fetchCards from "../../api/fetchCards";
 import { IDeck } from "../../api/fetchDecks";
@@ -12,6 +12,7 @@ export default function Cards() {
     const [descriptionContent, setdescriptionContent] = useState<string[]>([])
     const [deck, setDeck] = useState<IDeck | undefined>()
     const { deckId } = useParams(); 
+    const navigate = useNavigate();
 
     useEffect(() => { 
         async function getDescriptionFromServer() {
@@ -37,6 +38,10 @@ export default function Cards() {
     const onDeleteDescription = async (descriptionId: number) => {
         await deleteCard(deckId!, descriptionId)
         setdescriptionContent(descriptionContent.filter((description, index) => index !== descriptionId));
+    }
+
+    const backToHomePage = () => {
+        navigate('/homepage');
     }
 
     return (
@@ -80,6 +85,9 @@ export default function Cards() {
                         }
                     </ul>
                     
+                </div>
+                <div className="button-bottom">
+                    <button onClick={() => backToHomePage()}>back to homepage</button>
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
 .card-component {
     background: whitesmoke;
-    margin: 100px;
+    margin: 50px;
     min-height: 900px;
     width: 870px;
     border-radius: 40px;
@@ -69,4 +69,8 @@ h1 {
 .end {
     position: absolute;
     right: 550px;
+}
+
+.button-bottom {
+    padding: 20px;
 }

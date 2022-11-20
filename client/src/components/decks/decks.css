@@ -167,3 +167,8 @@
 .desciption-context {
     list-style-type: initial;
 }
+
+.button-bottom {
+    margin: 20px;
+    padding: 20px;
+}

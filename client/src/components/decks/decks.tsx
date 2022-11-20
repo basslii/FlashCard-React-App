@@ -1,7 +1,7 @@
 import './decks.css'
 import React, { useEffect, useState } from 'react'
 import Navbar from '../navbar/navbar';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import deleteDeck from '../../api/deleteDeck';
 import createDeck from '../../api/createDeck';
 import fetchDecks, { IDeck } from '../../api/fetchDecks';
@@ -9,6 +9,7 @@ import fetchDecks, { IDeck } from '../../api/fetchDecks';
 export default function Decks () {
     const [title, setTitle] = useState('');
     const [getDecks, setGetDecks] = useState<IDeck[]>([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         // fetch the dfata from the /decks
@@ -36,6 +37,10 @@ export default function Decks () {
         await deleteDeck(deckId);
         setGetDecks(getDecks.filter(deck => deck._id !== deckId))
     }
+
+    const backToHomePage = () => {
+        navigate('/homepage');
+    }
     
     return (
         <>
@@ -55,9 +60,9 @@ export default function Decks () {
                         <button className='btn' type='submit' disabled={!title.length}>add title</button>
                     </form>
                 </div>
-                <div className="flashCard-container">
+                {/* <div className="flashCard-container">
                     <label>Your FlashCard</label>
-                </div>
+                </div> */}
                 <ul className="view-decks">
                     {
                         getDecks.map((deck: any) => {
@@ -90,11 +95,13 @@ export default function Decks () {
                                 </>
                             )
                         })
-
                     }
                 </ul>
             </div>
             {/* <Notification /> */}
+            <div className="button-bottom">
+                    <button onClick={() => backToHomePage()}>back to homepage</button>
+            </div>
         </>
     )   
 }

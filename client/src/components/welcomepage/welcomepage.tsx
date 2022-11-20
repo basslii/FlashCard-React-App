@@ -7,7 +7,7 @@ export default class WelcomePage extends Component {
             <React.StrictMode>
                 <div className="welcomepage">
                     <h1>Welcome To Flash Card Single page Application</h1>
-                    <a href="/decks">Click Here To Proceed</a>
+                    <a href="/homepage">Click Here To Proceed</a>
                 </div>  
             </React.StrictMode>
         )

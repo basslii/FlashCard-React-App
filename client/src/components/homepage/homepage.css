@@ -1,0 +1,13 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    /* margin: 100px; */
+}
+
+.btn-placement {
+    padding: 20px;
+    margin: 40px;
+}
