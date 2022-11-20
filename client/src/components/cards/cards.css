@@ -1,8 +1,8 @@
 .card-component {
     background: whitesmoke;
-    margin-top: 100px;
-    height: 1000px;
-    width: 900px;
+    margin: 100px;
+    min-height: 900px;
+    width: 870px;
     border-radius: 40px;
 }
 
@@ -12,9 +12,61 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-
 } 
 
 h1 {
     color: black;
+}
+
+.desciption-context {
+    list-style-type: inherit;
+}
+
+.card-input {
+    padding: 20px;
+    /* margin: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-input label {
+    color: whitesmoke;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.black {
+    color: black;
+}
+
+.font-30 {
+    font-size: 30px;
+}
+
+.padding-left-0 {
+    padding-left: 0px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.end {
+    position: absolute;
+    right: 550px;
 }

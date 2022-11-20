@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .decks-input {
     padding: 20px;
     /* margin: 10px; */
@@ -44,11 +45,9 @@
     border-color: whitesmoke;
 }
 
-/* .btn-primary {
-    background-color: hotpink;
-    border: 1px solid hotpink;
-    color: whitesmoke;
-} */
+.btn:disabled {
+    border: none;
+}
 
 .flashCard-container {
     font-size: 40px;
@@ -63,14 +62,12 @@
 }
 
 .view-decks {
-    /* position: relative; */
     display: grid;
     grid-gap: 25px;
     width: 900px;
     margin: 0;
     padding-left: 0px;
     grid-template-columns: repeat(3, 1fr);
-    /* justify-items: center; */
 }
 
 .deckCard {
@@ -130,15 +127,15 @@
     transition: transform .2s;
 }
 
-.delete-button-place:hover {
-    /* font-size: 20px; */
-    transform: scale(1.5);
-}
-
 .btn-delete {
+    border: none;
     background: transparent;
     color: black;
     font-weight: 900;
+}
+
+.btn-delete:hover {
+    transform: scale(1.5);
 }
 
 .pos-bot {
@@ -156,4 +153,17 @@
     background: whitesmoke;
     color: #1a1a1a;
     border: 1px solid #1a1a1a;
+}
+
+.description-container {
+    top: 40px;
+    padding: 10px 0;
+    height: 180px;
+    position: absolute;
+    width: 100%;
+    overflow: hidden !important;
+}
+
+.desciption-context {
+    list-style-type: initial;
 }

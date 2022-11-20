@@ -15,7 +15,6 @@ export default function Decks () {
         async function getDecksFromServer() {
             const receivedDecks = await fetchDecks();
             setGetDecks(receivedDecks)
-            console.log(receivedDecks)
         }
 
         getDecksFromServer();
@@ -25,7 +24,7 @@ export default function Decks () {
     const onCreateDecks = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        if(title.length > 0) {
+        if(title.length) {
             const result = await createDeck(title)
             setGetDecks([...getDecks, result]);
         }
@@ -51,9 +50,9 @@ export default function Decks () {
                             className='form-control' 
                             placeholder='insert new desk title' 
                             value={title}
-                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {setTitle(event.target.value)}}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)}
                         />
-                        <button className='btn btn-primary' type='submit' disabled={title.length === 0}>add title</button>
+                        <button className='btn' type='submit' disabled={!title.length}>add title</button>
                     </form>
                 </div>
                 <div className="flashCard-container">
@@ -70,10 +69,14 @@ export default function Decks () {
                                                 <div className="delete-button-place">
                                                     <button className="btn-delete" onClick={() => onDeleteDeck(deck._id)}>X</button>
                                                 </div>
-                                                <p>test test</p>
-                                                <p>test test</p>
-                                                <p>test test</p>
-                                                <Link to={`/decks/${deck._id}`} className="pos-bot">Edit Deck</Link>
+                                                <div className="description-container">
+                                                    {
+                                                        deck?.descriptions?.map((description: string) => {
+                                                            return <li className="desciption-context">{description}</li>
+                                                        })
+                                                    }
+                                                </div>
+                                                <Link to={`/decks/${deck._id}`} className="pos-bot">View Deck</Link>
                                             </div>   
                                             <div className="deck-front">
                                                 <div className="delete-button-place">
