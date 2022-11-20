@@ -16,7 +16,7 @@ export class App extends Component {
               <Route path="/" element={<WelcomePage/>}/>
               <Route path="/homepage" element={<HomePage/>}/>
               <Route path="/decks" element={<Decks/>}/>
-              <Route path="/cards" element={<Cards/>}/>
+              <Route path="/card" element={<Cards/>}/>
             </Routes>
           </div>
         </Router>

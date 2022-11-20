@@ -1,14 +1,16 @@
 import './decks.css'
 import React, { Component, useEffect, useState } from 'react'
-import Navbar from '../navbar/navbar'
-type Ideck = {
-    title: string
+import Navbar from '../navbar/navbar';
+import Notification from '../notification/notification';
+
+type IDeck = {
+    title: string;
+    _id: string;
 }
 
 export default function Decks () {
     const [title, setTitle] = useState('');
-    // const [getDecks, setGetDecks] = useState<Ideck>([])
-    const [getDecks, setGetDecks] = useState([])
+    const [getDecks, setGetDecks] = useState<IDeck[]>([])
 
     useEffect(() => {
         // fetch the dfata from the /decks
@@ -25,7 +27,7 @@ export default function Decks () {
         event.preventDefault();
 
         if(title.length > 0) {
-            await fetch('http://localhost:5000/decks', {
+            const result = await fetch('http://localhost:5000/decks', {
                 method: 'POST',
                 body: JSON.stringify({
                     title,
@@ -33,10 +35,21 @@ export default function Decks () {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }).then((res: Response) => res.json());
+
+            setGetDecks([...getDecks, result]);
         }
 
         setTitle('');
+    }
+
+    const onDeleteDeck = async (deckId: string) => {
+        await fetch(`http://localhost:5000/decks/${deckId}`, {
+                method: 'DELETE',
+        });
+
+        setGetDecks(getDecks.filter(deck => deck._id !== deckId))
+        
     }
     
     return (
@@ -68,15 +81,23 @@ export default function Decks () {
                                     <div className="deckCard">
                                         <div className="deckCard-inner">
                                             <div className="deck-behind">
+                                                <div className="delete-button-place">
+                                                    <button className="btn-delete" onClick={() => onDeleteDeck(deck._id)}>X</button>
+                                                </div>
                                                 <p>test test</p>
                                                 <p>test test</p>
                                                 <p>test test</p>
+                                                <a href="/card" className="pos-bot">Edit Deck</a>
                                             </div>   
                                             <div className="deck-front">
+                                                <div className="delete-button-place">
+                                                    <button className="btn-delete" onClick={() => onDeleteDeck(deck._id)}>X</button>
+                                                </div>
                                                 <li key={deck._id}><label>{deck.title}</label></li>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </>
                             )
                         })
@@ -84,6 +105,7 @@ export default function Decks () {
                     }
                 </ul>
             </div>
+            {/* <Notification /> */}
         </>
     )   
 }

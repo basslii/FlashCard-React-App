@@ -40,6 +40,10 @@
     margin-left: 10px;
 }
 
+.btn:hover {
+    border-color: whitesmoke;
+}
+
 /* .btn-primary {
     background-color: hotpink;
     border: 1px solid hotpink;
@@ -59,14 +63,14 @@
 }
 
 .view-decks {
-    position: relative;
+    /* position: relative; */
     display: grid;
     grid-gap: 25px;
     width: 900px;
     margin: 0;
     padding-left: 0px;
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
+    /* justify-items: center; */
 }
 
 .deckCard {
@@ -112,10 +116,44 @@
 
 .deck-front {
     background: #bbb;
-    /* transform: rotateY(180deg) */
 }
 
 .deck-behind {
-    background: white;
+    background: whitesmoke;
     transform: rotateY(180deg)
+}
+
+.delete-button-place {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform .2s;
+}
+
+.delete-button-place:hover {
+    /* font-size: 20px; */
+    transform: scale(1.5);
+}
+
+.btn-delete {
+    background: transparent;
+    color: black;
+    font-weight: 900;
+}
+
+.pos-bot {
+    position: absolute;
+    bottom: 15px;
+    border-radius: 5px;
+    padding: 3px 20px;
+    font-size: 15px;
+    color: whitesmoke;
+    background: #1a1a1a;
+    border: 1px solid whitesmoke;
+}
+
+.pos-bot:hover {
+    background: whitesmoke;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
 }
