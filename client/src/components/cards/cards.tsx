@@ -1,16 +1,19 @@
-import { Component, ReactNode } from "react";
 import Navbar from "../navbar/navbar";
 import "./cards.css"
+import fetchDecks, { IDeck } from '../../api/fetchDecks';
 
-export default class Cards extends Component {
-    render(): ReactNode {
-        return (
-            <>
-                <Navbar />
-                <div className="cards-component">
-                    <h1>Welcome To Create Card Solution</h1>
+export default function Cards() {
+
+
+    return (
+        <>
+            <Navbar />
+            <div className="center">
+                <div className="card-component">
+                    <h1>{}</h1>
                 </div>
-            </>
-        )
-    }
+            </div>
+        </>
+    )
+    
 }

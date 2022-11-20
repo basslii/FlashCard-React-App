@@ -1,12 +1,10 @@
 import './decks.css'
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../navbar/navbar';
-import Notification from '../notification/notification';
-
-type IDeck = {
-    title: string;
-    _id: string;
-}
+import { Link } from 'react-router-dom';
+import deleteDeck from '../../api/deleteDeck';
+import createDeck from '../../api/createDeck';
+import fetchDecks, { IDeck } from '../../api/fetchDecks';
 
 export default function Decks () {
     const [title, setTitle] = useState('');
@@ -14,12 +12,13 @@ export default function Decks () {
 
     useEffect(() => {
         // fetch the dfata from the /decks
-        async function fetchDecksFromServer() {
-            const result = await fetch('http://localhost:5000/decks').then(res => res.json());
+        async function getDecksFromServer() {
+            const receivedDecks = await fetchDecks();
+            setGetDecks(receivedDecks)
+            console.log(receivedDecks)
+        }
 
-            setGetDecks(result);
-        };
-        fetchDecksFromServer();
+        getDecksFromServer();
 
     }, [getDecks])
  
@@ -27,16 +26,7 @@ export default function Decks () {
         event.preventDefault();
 
         if(title.length > 0) {
-            const result = await fetch('http://localhost:5000/decks', {
-                method: 'POST',
-                body: JSON.stringify({
-                    title,
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then((res: Response) => res.json());
-
+            const result = await createDeck(title)
             setGetDecks([...getDecks, result]);
         }
 
@@ -44,12 +34,8 @@ export default function Decks () {
     }
 
     const onDeleteDeck = async (deckId: string) => {
-        await fetch(`http://localhost:5000/decks/${deckId}`, {
-                method: 'DELETE',
-        });
-
+        await deleteDeck(deckId);
         setGetDecks(getDecks.filter(deck => deck._id !== deckId))
-        
     }
     
     return (
@@ -87,7 +73,7 @@ export default function Decks () {
                                                 <p>test test</p>
                                                 <p>test test</p>
                                                 <p>test test</p>
-                                                <a href="/card" className="pos-bot">Edit Deck</a>
+                                                <Link to={`/decks/${deck._id}`} className="pos-bot">Edit Deck</Link>
                                             </div>   
                                             <div className="deck-front">
                                                 <div className="delete-button-place">
