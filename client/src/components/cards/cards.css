@@ -74,3 +74,9 @@ h1 {
 .button-bottom {
     padding: 20px;
 }
+
+.list-container {
+    width: 70%;
+    word-wrap: break-word;
+    border-bottom: 1px solid black;
+}

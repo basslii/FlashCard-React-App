@@ -1,58 +1,48 @@
-import { SyntheticEvent, useEffect, useRef } from 'react';
-import './notification.css'
+import './notification.css';
+import { useCallback, useEffect } from 'react';
 
-const TOAST_TIME_MS = 4500 as const;
-
-interface ToastProperties {
-    timer?: number;
-
-    // label: string;
-}
-
-const Notification: React.FC<ToastProperties> = (props) => {
-
-    const notification = useRef<HTMLOutputElement>(null);
-    let timer: number = -1;
-
-    const onReset = () => {
-        window.clearTimeout(timer);
-    }
-
-    const onStart = () => {
-        timer = window.setTimeout(HideNotification, props.timer);
-    }
-
-    const onClose = (event: SyntheticEvent | null) => {
-        if (event) event.preventDefault();
-
-        HideNotification();
-    }
+export default function Notification(props: any) {
+    const {notificationList, setNotificationList} = props;
+    let notiId: number | null = null
 
     useEffect(() => {
-        onStart();
-        Notification.current?.focus();
+        const interval = setInterval(() => {
+            if(notificationList.length) {
+                notificationList.map(async (item:object , index:number) => {
+                    await onCloseNotification(index)
+                }).reverse()
+            }
+        }, 2000);
 
         return () => {
-            onClose(null);
-        };
-    });
+            clearInterval(interval);
+        }
+    }, [notificationList, setNotificationList])
+
+    const onCloseNotification = useCallback(async (id: number) => {
+        notiId = id;
+        const removeNotification = notificationList.filter((item:object, index:number) => index !== notiId)
+        setNotificationList(removeNotification)
+    }, [notificationList])
 
     return (
-        <output>
-            <div className="notification-container bottom-right bg-red">
-                <div className="notfication toast">
-                    <div className="delete-button-place">
-                        <button type="button" onClick={onClose} aria-label="Close dialog" className="btn-delete">X</button>
-                    </div>
-                    <p>Successfully deleted entry with id: </p>
-                </div>
-            </div>
-        </output>
+        <div className="container bottom-right">
+            {
+                notificationList.map((item: any, index: number) => {
+                    return (
+                        <div className="padding-10">
+                            <div key={index} style={{background: item?.backgroundColor, border: `1px solid ${item?.backgroundColor}`}} className='notification-container bottom-right'>
+                                <div className="delete-button-place-notification">
+                                    <button className="btn-delete-notification" onClick={() => onCloseNotification(index)}>x</button>
+                                </div>
+                                <h3 className='margin-10 font-24'>{item?.title}</h3>
+                                <p className='margin-0'>{item.description}</p>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
     )
 }
 
-Notification.defaultProps = {
-    timer: TOAST_TIME_MS
-};
-
-export default Notification;

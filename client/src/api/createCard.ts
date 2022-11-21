@@ -10,7 +10,7 @@ export default async function createCard(text: string, deckId: string): Promise<
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res: Response) => res.json());
+        }).then(async (res: Response) => await res.json());
 
     return result;
 }

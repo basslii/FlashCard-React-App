@@ -11,3 +11,41 @@
     padding: 20px;
     margin: 40px;
 }
+
+.white {
+    color: whitesmoke;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.black {
+    color: black;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-40 {
+    font-size: 40px;
+}
+
+.list-container-homepage {
+    /* width: 100%; */
+    padding-left: 20px;
+    padding-right: 20px;
+    word-wrap: break-word;
+    border-bottom: 1px solid black;
+}
+
+.description-container-homepage {
+    top: 40px;
+    padding: 10px 0;
+    margin: 0px 20px;
+    height: 180px;
+    position: absolute;
+    overflow: hidden !important;
+
+}    

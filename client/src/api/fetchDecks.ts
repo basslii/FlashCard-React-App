@@ -7,7 +7,7 @@ export type IDeck = {
 }
 
 export default async function fetchDecks(): Promise<IDeck[]> {
-    const result = await fetch(`${API_URL}/decks`).then((res:Response) => res.json());
+    const result = await fetch(`${API_URL}/decks`).then(async (res:Response) => await res.json());
 
     return result;
 }
