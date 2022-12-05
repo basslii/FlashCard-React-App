@@ -3,7 +3,7 @@
 full stack web development for creating a flash app webstite
 
 frontend tools: react, html, css, etc
-backend tools: express.js, mongoDB atlas, cors, etc
+backend tools: express.js, mongoDB atlas(cloud.mongodb.com), cors, etc
 
 to run this repo,
 
